@@ -3,8 +3,8 @@ from backend.models.users import Users
 from backend.app.core.security import hash_password
 
 
-def create_user(db:Session,username:str,password:str):
-    db_user = Users(username=username,hashed_password=hash_password(password=password))
+def create_user(db:Session,username:str,mail:str,password:str):
+    db_user = Users(username=username,mail=mail,hashed_password=hash_password(password=password))
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

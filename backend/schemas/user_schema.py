@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Any, Optional
 
 class BaseResponse(BaseModel):
@@ -7,8 +7,8 @@ class BaseResponse(BaseModel):
     data: Optional[Any] = None
 
 class UserCreate(BaseModel):
-    uuid : str
     username : str
+    mail:str
     password :str
 
 
@@ -26,6 +26,24 @@ class UserSchema(BaseModel):
     }
 
 class Token(BaseModel):
+    username:str
+    is_premium:bool
     access_token :str
     refresh_token:str
     token_type:str ="bearer"
+
+class VpnRegister(BaseModel):
+    username:str
+    server_name : str
+    public_key : str
+
+class VpnConfigResponse(BaseModel):
+    status : str = Field(default="success")
+    assigned_ip : str = Field(...)
+    server_public_key : str = Field(...)
+    endpoint : str = Field(...)
+    allowed_ips : str = Field(default="0.0.0.0/0")
+
+class BePremium(BaseModel):
+    username:str
+    is_premium : bool
