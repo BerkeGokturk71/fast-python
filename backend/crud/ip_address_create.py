@@ -1,6 +1,5 @@
 import ipaddress
 from sqlalchemy.orm import Session
-# Modellerini import et (ServerList'i de ekledik)
 from backend.models.users import IpPool, ServerList
 
 
@@ -10,27 +9,33 @@ def init_db_ips(session: Session):
     """
 
     # VPN Yapılandırma Listesi 
-    # (Buraya birden fazla sunucu ve subnet ekleyebilirsin)
     vpn_configs = [
         {
-            "server_name": "De_Almanya_1",
+            "server_name": "Frankfurt",
             "server_country": "DE",
             "ip_address":"18.195.50.202",
-            "cidr": "10.0.0.0/24",  # DÜZELTİLDİ: 10.8 değil, sunucunun çalıştığı 10.0 bloğu
-            "gateway": "10.0.0.1",  # VPN sunucusunun kendi IP'si (Havuza eklenmez)
+            "cidr": "10.0.0.0/24",
+            "gateway": "10.0.0.1",
             "is_premium": True,
             "public_key":"NJlfmmc1LJ2fitN7QauM9PS4AhbfMcGm7o+F5sYREm8="
         },{
-            "server_name": "Sw_İsviçre_1",
-            "server_country": "SW",
+            "server_name": "Stockholm",
+            "server_country": "SE",
             "ip_address": "13.62.228.126",
-            "cidr": "10.0.0.0/24",  # DÜZELTİLDİ: 10.8 değil, sunucunun çalıştığı 10.0 bloğu
-        "gateway": "10.0.0.1",  # VPN sunucusunun kendi IP'si (Havuza eklenmez)
+            "cidr": "10.0.0.0/24",
+        "gateway": "10.0.0.1",
             "is_premium": True,
             "public_key":"2KgkqdFXos5FZtKcf9DLVYr8u5ckpwuEQyG1whX9glQ="
+        },{
+            "server_name": "California",
+            "server_country": "USA",
+            "ip_address": "54.241.236.225",
+            "cidr": "10.0.0.0/24",
+        "gateway": "10.0.0.1",
+            "is_premium": False,
+            "public_key":"tkTn8gBI2rCqzTS/tG5gGHQPx1ASUevyr2uv0LzR7XA="
         },
-        # İleride 2. sunucuyu eklemek istersen buraya obje eklemen yeterli:
-        # { "server_name": "US_NewYork_1", "cidr": "10.9.0.0/24", "gateway": "10.9.0.1", "is_premium": True }
+
     ]
 
     for config in vpn_configs:

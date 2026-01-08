@@ -13,6 +13,8 @@ from backend.api.vpn_conn import router_vpn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    #await RedisClient.connect()
+    #print("Redis connected")
     Base.metadata.create_all(bind=engine)
 
     # 1. Uygulama Başlarken (Startup)
@@ -27,7 +29,8 @@ async def lifespan(app: FastAPI):
         db.close()  # İşimiz bitince bu özel oturumu kapatıyoruz
 
     yield  # Uygulama burada çalışmaya başlar (Requestleri dinler)
-
+    #await RedisClient.close()
+    #print("Redis closed")
     # 2. Uygulama Kapanırken (Shutdown)
     print("Uygulama kapatılıyor...")
 app = FastAPI(title="Wireguard",lifespan=lifespan)

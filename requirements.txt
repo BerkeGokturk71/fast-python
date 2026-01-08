@@ -8,3 +8,4 @@ passlib[bcrypt]
 python-multipart
 gunicorn
 requests
+redis
